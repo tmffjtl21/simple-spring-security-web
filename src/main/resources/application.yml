@@ -1,0 +1,20 @@
+
+logging:
+  level:
+    root: info
+
+#  =/h2-console
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  datasource:
+    url: jdbc:h2:~/test;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    console.enabled: true
+    console.path: /console
