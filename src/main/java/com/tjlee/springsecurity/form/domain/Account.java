@@ -2,13 +2,23 @@ package com.tjlee.springsecurity.form.domain;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Account {
+
+    public Account() {
+    }
+
+    public Account(String username, String password, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
 
     @Id @GeneratedValue
     private Long id;
@@ -18,7 +28,8 @@ public class Account {
 
     private String password;
 
-    private String role;
+    @OneToMany(targetEntity =Role.class ,mappedBy = "account")
+    private List<Role> roles = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -36,12 +47,12 @@ public class Account {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getPassword() {
