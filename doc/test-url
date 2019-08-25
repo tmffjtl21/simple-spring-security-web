@@ -1,0 +1,2 @@
+insert : http://127.0.0.1:8080/account/admin1/123?roleNames=ADMIN,USER
+read : http://127.0.0.1:8080/account/username/admin1

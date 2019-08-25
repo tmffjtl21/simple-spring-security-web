@@ -1,12 +1,12 @@
 package com.tjlee.springsecurity.form.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Account {
@@ -65,5 +65,10 @@ public class Account {
 
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(this.password);
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 }

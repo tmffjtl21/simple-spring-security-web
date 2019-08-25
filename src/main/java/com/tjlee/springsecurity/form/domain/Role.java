@@ -1,5 +1,8 @@
 package com.tjlee.springsecurity.form.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +15,7 @@ public class Role {
 
     private String roleName;
 
-    @ManyToOne(targetEntity = Account.class)
+    @ManyToOne(targetEntity = Account.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "accountId", referencedColumnName = "id",
             insertable = false, updatable = false)
     private Account account;
@@ -47,5 +50,10 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
     }
 }
