@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @Component
 @Transactional
@@ -31,7 +31,7 @@ public class DataInsertRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        IntStream.range(1, 15).forEach(value -> accountService.createNew(new AccountDTO("tjlee" + value,"1111", new ArrayList<String>()),
+        IntStream.range(1, 15).forEach(value -> accountService.createNew(new AccountDTO("tjlee" + value,"1111", Arrays.asList("USER", "ADMIN")),
                 Collections.singletonList("USER")));
     }
 }
