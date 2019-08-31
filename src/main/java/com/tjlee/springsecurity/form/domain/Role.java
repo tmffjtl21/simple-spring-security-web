@@ -4,20 +4,21 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Role {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
 
     private Long accountId;
 
     private String roleName;
 
-    @ManyToOne(targetEntity = Account.class, cascade=CascadeType.ALL)
-    @JoinColumn(name = "accountId", referencedColumnName = "id",
-            insertable = false, updatable = false)
+    @ManyToOne(targetEntity = Account.class)
+    @JoinColumn(name = "accountId", referencedColumnName = "id", insertable = false, updatable = false)
     private Account account;
 
     public Account getAccount() {
