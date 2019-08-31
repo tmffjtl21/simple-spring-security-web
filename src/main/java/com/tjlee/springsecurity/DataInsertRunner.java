@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Component
 @Transactional
@@ -29,20 +31,8 @@ public class DataInsertRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        accountService.createNew(new AccountDTO("tjlee1", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee2", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee3", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee4", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee5", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee6", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee7", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee8", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee9", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee10", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee11", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee12", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee13", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
-        accountService.createNew(new AccountDTO("tjlee14", "1111", new ArrayList<String>()), Collections.singletonList("USER"));
+        IntStream.range(1, 15).forEach(value -> accountService.createNew(new AccountDTO("tjlee" + value,"1111", new ArrayList<String>()),
+                Collections.singletonList("USER")));
     }
 }
 
