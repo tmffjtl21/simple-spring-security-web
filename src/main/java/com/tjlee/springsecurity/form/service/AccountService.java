@@ -45,7 +45,7 @@ public class AccountService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
-    public AccountDTO createNew(final AccountDTO accountDTO, final String[] roleNames) {
+    public AccountDTO createNew(final AccountDTO accountDTO, final List<String> roleNames) {
         Account account = Optional.ofNullable(accountRepository.findByUsername(accountDTO.getUsername()))
                 .map(returnAccount -> {         // update
                     returnAccount.setUsername(accountDTO.getUsername());
@@ -65,13 +65,13 @@ public class AccountService implements UserDetailsService {
         return accountMapper.toDTO(accountRepository.findByUsername(id));
     }
 
-    private void setRoles(Account account, final String[] roleNames){
+    private void setRoles(Account account, final List<String> roleNames){
 
         // TODO 좀더 봐야함
         final List<String> roleList = account.getRoles()
                 .stream().map(Role::getRoleName).collect(Collectors.toList());
 
-        Arrays.stream(roleNames).forEach(roleName -> {
+        roleNames.forEach(roleName -> {
             if(!roleList.contains(roleName)){
                 Role role = new Role();
                 role.setRoleName(roleName);

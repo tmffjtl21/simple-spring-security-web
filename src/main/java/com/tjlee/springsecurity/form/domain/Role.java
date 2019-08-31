@@ -4,10 +4,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Role {
+
+    public Role() {
+    }
+
+    public Role(String roleName) {
+        super();
+        this.roleName = roleName;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

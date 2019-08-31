@@ -5,6 +5,17 @@ import java.util.List;
 
 public class AccountDTO {
 
+    public AccountDTO() {
+        super();
+    }
+
+    public AccountDTO(String username, String password, List<String> roles) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
     private Long id;
 
     private String username;

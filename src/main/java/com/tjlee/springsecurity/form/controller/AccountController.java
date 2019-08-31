@@ -18,7 +18,7 @@ public class AccountController {
     @GetMapping("/account/{username}/{password}")
     public AccountDTO createAccount(@ModelAttribute AccountDTO accountDTO, @RequestParam String[] roleNames){
         System.out.println(Arrays.toString(roleNames));
-        return accountService.createNew(accountDTO, roleNames);
+        return accountService.createNew(accountDTO, Arrays.asList(roleNames));
     }
 
     @GetMapping("/account/username/{id}")

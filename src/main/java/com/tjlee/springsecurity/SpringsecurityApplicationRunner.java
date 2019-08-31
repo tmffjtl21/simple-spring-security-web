@@ -3,10 +3,9 @@ package com.tjlee.springsecurity;
 import com.tjlee.springsecurity.form.domain.Account;
 import com.tjlee.springsecurity.form.domain.Study;
 import com.tjlee.springsecurity.form.service.AccountService;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +14,7 @@ import javax.persistence.PersistenceContext;
 
 @Component
 @Transactional
+@Order(0)
 public class SpringsecurityApplicationRunner implements ApplicationRunner {
 
     AccountService accountService;
@@ -29,21 +29,15 @@ public class SpringsecurityApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        accountService.createNew(new Account("admin", "1111", Arrays.asList("ADMIN", "USER", "SUPERADMIN")));
-//        accountService.createNew(new Account("tjlee1", "1111", Arrays.asList("USER")));
-//        accountService.createNew(new Account("tjlee2", "1111", Arrays.asList("USER")));
-//        accountService.createNew(new Account("tjlee3", "1111", Arrays.asList("USER")));
-//        accountService.createNew(new Account("tjlee4", "1111", Arrays.asList("USER")));
-//        accountService.createNew(new Account("tjlee5", "1111", Arrays.asList("USER")));
 
         // 처음 New를 하면 Transient 상태 ( JPA가 전혀 모르는 상태 )
         Account account = new Account();
         account.setUsername("tjlee");
         account.setPassword("tjlee");
-//
+
 //        // persistent상태로 변화됨 바로 DB에 들어가는건 아님
 //        // 하이버네이트가 관리하는 객체로 변경되는 시점
-//        entityManager.persist(account);
+        entityManager.persist(account);
 
         Study study = new Study();
         study.setName("Sping Data JPA");
