@@ -27,6 +27,7 @@ public class SpringsecurityApplicationRunner implements ApplicationRunner {
         this.accountService = accountService;
     }
 
+    // 그냥 공부용 의미없음.
     @Override
     public void run(ApplicationArguments args) throws Exception {
 

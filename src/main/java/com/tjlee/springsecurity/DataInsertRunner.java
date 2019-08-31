@@ -1,10 +1,7 @@
 package com.tjlee.springsecurity;
 
-import com.tjlee.springsecurity.form.domain.Account;
-import com.tjlee.springsecurity.form.domain.Role;
 import com.tjlee.springsecurity.form.dto.AccountDTO;
 import com.tjlee.springsecurity.form.service.AccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
@@ -14,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 @Component
@@ -22,8 +18,7 @@ import java.util.Collections;
 @Order(1)
 public class DataInsertRunner implements ApplicationRunner {
 
-    final
-    AccountService accountService;
+    final AccountService accountService;
 
     @PersistenceContext
     EntityManager entityManager;
