@@ -40,10 +40,10 @@ public class Account {
     // orphanRemoval : 고아객체는 삭제됨
     // Account의 상태가 변할때 List<Role>도 상태를 전이하고 싶을 경우, 기본적으로는 변화없음
     @OneToMany(targetEntity =Role.class ,mappedBy = "account"
-            , cascade = CascadeType.ALL, orphanRemoval = true)
+            , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Study> studies = new HashSet<>();
 
     public Long getId() {

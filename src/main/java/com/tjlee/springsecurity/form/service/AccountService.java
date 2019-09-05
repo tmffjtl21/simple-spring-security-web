@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,21 +26,24 @@ public class AccountService implements UserDetailsService {
 
     private final AccountMapper accountMapper;
 
-    public AccountService(AccountRepository accountRepository, RoleRepository roleRepository, AccountMapper accountMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public AccountService(AccountRepository accountRepository, RoleRepository roleRepository, AccountMapper accountMapper, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
         this.accountMapper = accountMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         return Optional.ofNullable(accountRepository.findByUsername(username))
                 .map(member ->
-                        User.builder()
-                                .username(member.getUsername())
-                                .password(member.getPassword())
-                                .roles(member.getRoles().toArray(new String[0]))
+                        User.withUsername(member.getUsername())
+                                .password("{bcrypt}" + member.getPassword())
+                                .roles(member.getRoles().stream().map(Role::getRoleName).collect(Collectors.joining()))
                                 .build())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
