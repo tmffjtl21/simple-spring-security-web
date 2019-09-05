@@ -33,6 +33,8 @@ public class DataInsertRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         IntStream.range(1, 15).forEach(value -> accountService.createNew(new AccountDTO("tjlee" + value,"1111", Arrays.asList("USER", "ADMIN")),
                 Collections.singletonList("USER")));
+
+        accountService.createNew(new AccountDTO("admiin","admiin", null), Arrays.asList("USER", "ADMIN"));
     }
 }
 

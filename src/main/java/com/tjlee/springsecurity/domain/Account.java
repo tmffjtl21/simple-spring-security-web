@@ -1,11 +1,10 @@
-package com.tjlee.springsecurity.form.domain;
+package com.tjlee.springsecurity.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +30,10 @@ public class Account {
     private String username;
 
     private String password;
+
+    private String accessToken;
+
+    private String refreshToken;
 
     // cascade = CascadeType.ALL : Account 맵핑클래스의 행동(삽입,업데이트,삭제)에 Role 맵핑클래스도
     // 동일하게 영향을 받겠다. 즉 Account insert/delete 되면 연결된 Role 자동 insert/delete 된다.
@@ -85,6 +88,22 @@ public class Account {
 
     public void setStudies(Set<Study> studies) {
         this.studies = studies;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     @Override

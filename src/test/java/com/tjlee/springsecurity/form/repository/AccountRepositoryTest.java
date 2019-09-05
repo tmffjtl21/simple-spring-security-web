@@ -1,6 +1,6 @@
 package com.tjlee.springsecurity.form.repository;
 
-import com.tjlee.springsecurity.form.domain.Account;
+import com.tjlee.springsecurity.domain.Account;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

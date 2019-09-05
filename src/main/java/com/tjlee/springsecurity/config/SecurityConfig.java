@@ -16,8 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);
 
         http.authorizeRequests()
-                    .mvcMatchers("/", "/info", "/account/**", "/h2-console").permitAll()
+//                    .mvcMatchers("/", "/info", "/account/**", "/h2-console").permitAll()
                     .mvcMatchers("/admin").hasRole("ADMIN")
+                    .mvcMatchers("/oauth/**").permitAll()
                     .anyRequest().authenticated();
         http.formLogin();
         http.httpBasic();

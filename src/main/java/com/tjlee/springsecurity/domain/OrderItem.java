@@ -1,7 +1,6 @@
-package com.tjlee.springsecurity.form.domain;
+package com.tjlee.springsecurity.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 //@Entity

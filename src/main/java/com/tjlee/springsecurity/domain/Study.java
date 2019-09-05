@@ -1,4 +1,4 @@
-package com.tjlee.springsecurity.form.domain;
+package com.tjlee.springsecurity.domain;
 
 import javax.persistence.*;
 

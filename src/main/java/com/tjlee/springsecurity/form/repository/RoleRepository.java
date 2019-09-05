@@ -1,6 +1,6 @@
 package com.tjlee.springsecurity.form.repository;
 
-import com.tjlee.springsecurity.form.domain.Role;
+import com.tjlee.springsecurity.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
