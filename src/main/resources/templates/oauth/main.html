@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
 <head>
     <meta charset="UTF-8">
     <title>main창</title>
 </head>
 <body>
-main창임
 </body>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    var ready = $(document).ready(function () {
+        // alert(222222222222);
+    });
+
+    // clientid : 466994442889-itpoua6429rtsqtneh4jlvi9den4kcvt.apps.googleusercontent.com
+    // cliend-secret : X69euFcRHZ5WxH6BoD5fSPFO
+
+    // https://accounts.google.com/o/oauth2/v2/auth?
+    // scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly&
+    // access_type=offline&
+    // include_granted_scopes=true&
+    // state=state_parameter_passthrough_value&
+    // redirect_uri=http%3A%2F%2Foauth2.example.com%2Fcallback&
+    // response_type=code&
+    // client_id=client_id
+
+    // scope : 사용할 구글의 기능 종류
+    // access_type : (accesstype의 수명을 어떻게 관리할것인지) : online, offline(오프라인일때 refresh 토큰을 줌)
+    // redirect_uri : code값을 받을 주소 (client의 주소)
+    // response_type : 리소스서버로부터 어떤 정보를 받을 것인가
+</script>
 </html>

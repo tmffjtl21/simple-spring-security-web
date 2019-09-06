@@ -1,18 +1,18 @@
 package com.tjlee.springsecurity.oauth2.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 @RequestMapping("/oauth")
 public class Oauth2ClientController {
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String main(){
         return "oauth/main";
     }
@@ -23,5 +23,11 @@ public class Oauth2ClientController {
 
         model.addAttribute("test", "test1111");
         return "oauth/get-code";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model, @RequestParam(required = false) String code){
+        model.addAttribute("code", code);
+        return "oauth/login";
     }
 }

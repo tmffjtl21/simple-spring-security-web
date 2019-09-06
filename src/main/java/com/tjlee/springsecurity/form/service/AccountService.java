@@ -42,7 +42,7 @@ public class AccountService implements UserDetailsService {
         return Optional.ofNullable(accountRepository.findByUsername(username))
                 .map(member ->
                         User.withUsername(member.getUsername())
-                                .password("{bcrypt}" + member.getPassword())
+                                .password(member.getPassword())
                                 .roles(member.getRoles().stream().map(Role::getRoleName).collect(Collectors.joining()))
                                 .build())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
