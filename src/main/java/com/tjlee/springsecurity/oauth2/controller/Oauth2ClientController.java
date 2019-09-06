@@ -26,7 +26,9 @@ public class Oauth2ClientController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, @RequestParam(required = false) String code){
+    public String login(Model model, Principal principal, @RequestParam(required = false) String code){
+
+        model.addAttribute("name", principal.getName());
         model.addAttribute("code", code);
         return "oauth/login";
     }
