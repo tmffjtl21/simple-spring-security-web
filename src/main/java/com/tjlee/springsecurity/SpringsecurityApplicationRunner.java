@@ -1,7 +1,7 @@
 package com.tjlee.springsecurity;
 
-import com.tjlee.springsecurity.form.domain.Account;
-import com.tjlee.springsecurity.form.domain.Study;
+import com.tjlee.springsecurity.domain.Account;
+import com.tjlee.springsecurity.domain.Study;
 import com.tjlee.springsecurity.form.service.AccountService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

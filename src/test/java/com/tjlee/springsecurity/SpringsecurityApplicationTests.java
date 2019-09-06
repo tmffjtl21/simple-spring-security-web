@@ -1,6 +1,6 @@
 package com.tjlee.springsecurity;
 
-import com.tjlee.springsecurity.form.domain.Account;
+import com.tjlee.springsecurity.domain.Account;
 import com.tjlee.springsecurity.form.repository.AccountRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;

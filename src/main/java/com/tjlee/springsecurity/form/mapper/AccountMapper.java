@@ -1,7 +1,7 @@
 package com.tjlee.springsecurity.form.mapper;
 
-import com.tjlee.springsecurity.form.domain.Account;
-import com.tjlee.springsecurity.form.domain.Role;
+import com.tjlee.springsecurity.domain.Account;
+import com.tjlee.springsecurity.domain.Role;
 import com.tjlee.springsecurity.form.dto.AccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,12 +1,12 @@
 package com.tjlee.springsecurity.form.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
 
-@RestController
+@Controller
 public class SampleController {
 
     @GetMapping("/")
@@ -16,7 +16,6 @@ public class SampleController {
         } else {
             model.addAttribute("message", "Hello, " + principal.getName());
         }
-
         return "index";
     }
 

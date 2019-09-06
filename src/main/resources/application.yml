@@ -14,8 +14,21 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
   datasource:
-    url: jdbc:log4jdbc:mysql://localhost:3306/hibernate_test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:log4jdbc:mysql://localhost:3306/hibernate_test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: tjlee
     password: tjlee
     #    driver-class-name: com.mysql.jdbc.Driver
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+  # devtools option
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  thymeleaf:
+    cache: false
+
+  # Static resources reloading during development
+  profiles:
+    active: dev

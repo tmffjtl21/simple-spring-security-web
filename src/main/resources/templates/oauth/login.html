@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <style>
+        input{
+            width: 500px;
+        }
+        p{
+            width: 500px;
+        }
+    </style>
+    <a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Foauth%2Flogin&response_type=code&client_id=466994442889-itpoua6429rtsqtneh4jlvi9den4kcvt.apps.googleusercontent.com">
+        구글 인증하러 가기</a>
+    <br/>
+    <br/>
+    <br/>
+    현재 로그인 :
+     <p th:text="${name}">익명</p>
+    <form action="https://www.googleapis.com/oauth2/v4/token" method="post" enctype="application/x-www-form-urlencoded">
+        code : <input type="text" name="code" th:value="${code}"/><br/>
+        client_id : <input type="text" name="client_id" value="466994442889-itpoua6429rtsqtneh4jlvi9den4kcvt.apps.googleusercontent.com"/><br/>
+        client_secret : <input type="text" name="client_secret" value="X69euFcRHZ5WxH6BoD5fSPFO"/><br/>
+        redirect_uri : <input type="text" name="redirect_uri" value="http://localhost:8080/oauth/login"/><br/>
+        grant_type : <input type="text" name="grant_type" value="authorization_code"/><br/>
+        <input type="submit" value="코드값 전송"/>
+    </form>
+
+</body>
+</html>
+
+// scope : 받는 방법 - google
+// https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly
+// code : code=4/qwGPynCoXYnl9e28kdw2FQagRhaBWRbFn51DGFbyFNWgjeN8OTXObBrlHOOOTjrNWb2-ikUuKwizB6hyI1tuiAs
+// 여기서 받은 코드는 한번만 쓸수있음
+// &scope=https://www.googleapis.com/auth/calendar.readonly%20https://www.googleapis.com/auth/calendar
+// clientid : 466994442889-itpoua6429rtsqtneh4jlvi9den4kcvt.apps.googleusercontent.com
+// cliend-secret : X69euFcRHZ5WxH6BoD5fSPFO

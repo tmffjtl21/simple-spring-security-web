@@ -1,7 +1,7 @@
 package com.tjlee.springsecurity.form.service;
 
-import com.tjlee.springsecurity.form.domain.Account;
-import com.tjlee.springsecurity.form.domain.Role;
+import com.tjlee.springsecurity.domain.Account;
+import com.tjlee.springsecurity.domain.Role;
 import com.tjlee.springsecurity.form.dto.AccountDTO;
 import com.tjlee.springsecurity.form.mapper.AccountMapper;
 import com.tjlee.springsecurity.form.repository.AccountRepository;
@@ -10,9 +10,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,21 +26,24 @@ public class AccountService implements UserDetailsService {
 
     private final AccountMapper accountMapper;
 
-    public AccountService(AccountRepository accountRepository, RoleRepository roleRepository, AccountMapper accountMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public AccountService(AccountRepository accountRepository, RoleRepository roleRepository, AccountMapper accountMapper, PasswordEncoder passwordEncoder) {
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
         this.accountMapper = accountMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @SuppressWarnings("SuspiciousToArrayCall")
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         return Optional.ofNullable(accountRepository.findByUsername(username))
                 .map(member ->
-                        User.builder()
-                                .username(member.getUsername())
+                        User.withUsername(member.getUsername())
                                 .password(member.getPassword())
-                                .roles(member.getRoles().toArray(new String[0]))
+                                .roles(member.getRoles().stream().map(Role::getRoleName).collect(Collectors.joining()))
                                 .build())
                 .orElseThrow(() -> new UsernameNotFoundException(""));
     }
@@ -49,15 +52,17 @@ public class AccountService implements UserDetailsService {
         Account account = Optional.ofNullable(accountRepository.findByUsername(accountDTO.getUsername()))
                 .map(returnAccount -> {         // update
                     returnAccount.setUsername(accountDTO.getUsername());
+                    accountRepository.save(returnAccount);
                     setRoles(returnAccount, roleNames);
                     return returnAccount;
                 })
                 .orElseGet(() -> {          // insert
                     Account returnAccount = accountMapper.toEntity(accountDTO);
+                    returnAccount.setUsername(accountDTO.getUsername());
+                    accountRepository.save(returnAccount);
                     setRoles(returnAccount, roleNames);
                     return returnAccount;
                 });
-        accountRepository.save(account);
         return accountMapper.toDTO(account);
     }
 
@@ -67,7 +72,6 @@ public class AccountService implements UserDetailsService {
 
     private void setRoles(Account account, final List<String> roleNames){
 
-        // TODO 좀더 봐야함
         final List<String> roleList = account.getRoles()
                 .stream().map(Role::getRoleName).collect(Collectors.toList());
 
@@ -78,7 +82,6 @@ public class AccountService implements UserDetailsService {
                 role.setAccountId(account.getId());
                 role.setAccount(account);
                 roleRepository.save(role);
-                account.getRoles().add(role);
             }
         });
     }
