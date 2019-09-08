@@ -20,12 +20,12 @@ import java.util.stream.IntStream;
 @Order(1)
 public class DataInsertRunner implements ApplicationRunner {
 
-    final AccountService accountService;
+    private final AccountService accountService;
 
-    final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public DataInsertRunner(AccountService accountService, PasswordEncoder passwordEncoder) {
         this.accountService = accountService;
